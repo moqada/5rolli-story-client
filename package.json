@@ -31,7 +31,10 @@
     "lib"
   ],
   "homepage": "https://github.com/moqada/5rolli-story-client#readme",
-  "keywords": [],
+  "keywords": [
+    "5rolli",
+    "trello"
+  ],
   "license": "MIT",
   "main": "lib/index.js",
   "repository": {
