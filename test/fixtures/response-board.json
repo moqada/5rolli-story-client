@@ -1,0 +1,217 @@
+{
+  "id": "xxxxxxxxxxxxxxxxxx",
+  "name": "5rolli-dev",
+  "desc": "",
+  "descData": null,
+  "closed": false,
+  "idOrganization": "xxxxxxxxxxxxxxx",
+  "pinned": false,
+  "url": "https://trello.com/b/dummyId/5rolli-dev",
+  "shortUrl": "https://trello.com/b/dummyId",
+  "prefs": {
+    "permissionLevel": "org",
+    "voting": "disabled",
+    "comments": "members",
+    "invitations": "members",
+    "selfJoin": true,
+    "cardCovers": true,
+    "cardAging": "regular",
+    "calendarFeedEnabled": false,
+    "background": "blue",
+    "backgroundColor": "#0079BF",
+    "backgroundImage": null,
+    "backgroundImageScaled": null,
+    "backgroundTile": false,
+    "backgroundBrightness": "unknown",
+    "canBePublic": true,
+    "canBeOrg": true,
+    "canBePrivate": true,
+    "canInvite": true
+  },
+  "labelNames": {
+    "green": "open",
+    "yellow": "issue",
+    "orange": "waiting",
+    "red": "",
+    "purple": "",
+    "blue": "",
+    "sky": "",
+    "lime": "",
+    "pink": "",
+    "black": ""
+  },
+  "cards": [
+    {
+      "id": "1111111111111111111111",
+      "name": "1: 導入画面",
+      "pos": 131072,
+      "idList": "xxxxxxxxxxxxxxlist3",
+      "labels": [
+        {
+          "id": "xxxxxxxxxxxxxlabel1",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "issue",
+          "color": "yellow",
+          "uses": 520
+        },
+        {
+          "id": "xxxxxxxxxxxxxlabel2",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "open",
+          "color": "green",
+          "uses": 716
+        }
+      ],
+      "shortUrl": "https://trello.com/c/111111",
+      "idMembers": []
+    },
+    {
+      "id": "22222222222222222",
+      "name": "11: いい画面",
+      "pos": 212992,
+      "idList": "xxxxxxxxxxxxxxlist3",
+      "labels": [
+        {
+          "id": "xxxxxxxxxxxxxlabel1",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "issue",
+          "color": "yellow",
+          "uses": 520
+        },
+        {
+          "id": "xxxxxxxxxxxxxlabel2",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "open",
+          "color": "green",
+          "uses": 716
+        }
+      ],
+      "shortUrl": "https://trello.com/c/222222",
+      "idMembers": []
+    },
+    {
+      "id": "xxxxxxxxxxxxxxxxxx",
+      "name": "2: (70/140) ユーザはサービス説明を閲覧できる #1",
+      "pos": 147456,
+      "idList": "xxxxxxxxxxxxxxlist2",
+      "labels": [
+        {
+          "id": "xxxxxxxxxxxxxlabel2",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "open",
+          "color": "green",
+          "uses": 716
+        }
+      ],
+      "shortUrl": "https://trello.com/c/333333",
+      "idMembers": [
+        "mmmmmmmmmmmoqada"
+      ]
+    },
+    {
+      "id": "xxxxxxxxxxxxxxx",
+      "name": "3: (80/170) ユーザはいい画面へ遷移できる #1 &10 &20",
+      "pos": 163840,
+      "idList": "xxxxxxxxxxxxxxlist2",
+      "labels": [
+        {
+          "id": "xxxxxxxxxxxxxlabel1",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "open",
+          "color": "green",
+          "uses": 716
+        }
+      ],
+      "shortUrl": "https://trello.com/c/44444444",
+      "idMembers": [
+        "mmmmmmmmmmmoqada"
+      ]
+    },
+    {
+      "id": "xxxxxxxxxxxxxxx",
+      "name": "190: ブラッシュアップ",
+      "pos": 3457024,
+      "idList": "xxxxxxxxxxxxxxlist1",
+      "labels": [
+        {
+          "id": "xxxxxxxxxxxxxlabel1",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "issue",
+          "color": "yellow",
+          "uses": 520
+        },
+        {
+          "id": "xxxxxxxxxxxxxlabel2",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "open",
+          "color": "green",
+          "uses": 716
+        }
+      ],
+      "shortUrl": "https://trello.com/c/555555",
+      "idMembers": []
+    },
+    {
+      "id": "xxxxxxxxxxxxxxx",
+      "name": "あかんやつ",
+      "pos": 3457999,
+      "idList": "xxxxxxxxxxxxxxlist1",
+      "labels": [
+        {
+          "id": "xxxxxxxxxxxxxlabel1",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "issue",
+          "color": "yellow",
+          "uses": 520
+        },
+        {
+          "id": "xxxxxxxxxxxxxlabel2",
+          "idBoard": "xxxxxxxxxxxdummyId",
+          "name": "open",
+          "color": "green",
+          "uses": 716
+        }
+      ],
+      "shortUrl": "https://trello.com/c/999999",
+      "idMembers": []
+    }
+  ],
+  "lists": [
+    {
+      "id": "xxxxxxxxxxxxxxlist3",
+      "name": "Issues",
+      "closed": false,
+      "idBoard": "xxxxxxxxxxxdummyId",
+      "pos": 32767.5,
+      "subscribed": false
+    },
+    {
+      "id": "xxxxxxxxxxxxxxlist2",
+      "name": "Sprint. 1 (20151130)",
+      "closed": false,
+      "idBoard": "xxxxxxxxxxxdummyId",
+      "pos": 65535,
+      "subscribed": false
+    },
+    {
+      "id": "xxxxxxxxxxxxxxlist1",
+      "name": "inbox",
+      "closed": false,
+      "idBoard": "xxxxxxxxxxxdummyId",
+      "pos": 204799,
+      "subscribed": false
+    }
+  ],
+  "members": [
+    {
+      "id": "mmmmmmmmmmmoqada",
+      "username": "moqada",
+      "avatarHash": "e224a7409ad3fc91a94cbc9ca9fae632"
+    },
+    {
+      "id": "iiiiiiiiiiiiide",
+      "username": "ideyuta",
+      "avatarHash": "911335c0f982355c89298eea1afea98e"
+    }
+  ]
+}
