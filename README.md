@@ -8,7 +8,7 @@
 [![DevDependency Status][daviddm-dev-image]][daviddm-dev-url]
 [![License][license-image]][license-url]
 
-Story Client for 5ROLLI
+Story Client for [5ROLLI](https://github.com/tongariboyz/5rolli).
 
 
 ## Installation
