@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/index.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/moqada/5rolli-story-client.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~StoryClient.html">StoryClient</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Card">Card</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InvalidStory">InvalidStory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Issue">Issue</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Member">Member</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Sprint">Sprint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Story">Story</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StoryNode">StoryNode</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* eslint camelcase: 0 */
+// XXX: Trello API&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3067;&#x30B9;&#x30CD;&#x30FC;&#x30AF;&#x30B1;&#x30FC;&#x30B9;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308B;&#x305F;&#x3081;camelcase&#x30EB;&#x30FC;&#x30EB;&#x3092;&#x89E3;&#x9664;
+import request from &apos;superagent&apos;;
+
+const NAME_BASE_REGEX = /^(\d+):\s+(?:\((?:(\d+)\/)?(\d+)\/(\d+)\)\s+)?(.*)$/;
+const API_ENDPOINT = &apos;https://api.trello.com&apos;;
+const AVATAR_ENDPOINT = &apos;https://trello-avatars.s3.amazonaws.com&apos;;
+const STORY_TYPE = {
+  issue: &apos;issue&apos;,
+  story: &apos;story&apos;,
+  invalid: &apos;invalid&apos;
+};
+const STORY_STATUS = {
+  open: &apos;open&apos;,
+  close: &apos;close&apos;,
+  waiting: &apos;waiting&apos;,
+  unknown: &apos;unknown&apos;
+};
+
+/**
+ * @typedef {Object} Card
+ *
+ * @property {string} listName Trello list name
+ * @property {string[]} labels Trello label name list
+ * @property {number} pos Trello card position
+ * @property {url} string Trello card url
+ */
+
+/**
+ * @typedef {Object} Member
+ *
+ * @property {string} username Trello username
+ * @property {string} ?avatarUrl Trello avatar url
+ */
+
+/**
+ * @typedef {Object} Sprint
+ *
+ * @property {string} name sprint name
+ * @property {Date} due sprint due date
+ */
+
+/**
+ * @typedef {Object} Story
+ *
+ * @property {number} id story id
+ * @property {string} title story title
+ * @property {string} type story type
+ * @property {string} status story status
+ * @property {number} parentId parent story id
+ * @property {number[]} dependIds depends story id
+ * @property {Member[]} members member list
+ * @property {Story[]} children children story list
+ * @property {Sprint} sprint? sprint
+ * @property {{spent: ?number, es50: ?number, es90: ?number}} time? time
+ * @property {Card} card Trello card
+ */
+
+/**
+ * @typedef {Object} Issue
+ *
+ * @property {number} id issue id
+ * @property {string} title issue title
+ * @property {string} type issue type
+ * @property {string} status issue status
+ * @property {number[]} dependIds depends story id
+ * @property {Member[]} members member list
+ * @property {Story[]} children children story list
+ * @property {Card} card Trello card
+ */
+
+/**
+ * @typedef {Object} InvalidStory
+ *
+ * @property {string} title story title
+ * @property {string} type story type
+ * @property {Card} card Trello card
+ */
+
+/**
+ * @typedef {Story|InvalidStory|Issue} StoryNode
+ */
+
+
+/**
+ * Story Client
+ */
+export default class StoryClient {
+
+  /**
+   * constructor
+   *
+   * @param {string} apiToken trello api token
+   * @param {string} apiKey trello api key
+   * @param {string} boardId trello board id
+   */
+  constructor(apiToken, apiKey, boardId) {
+    this.boardId = boardId;
+    this.apiToken = apiToken;
+    this.apiKey = apiKey;
+  }
+
+  /**
+   * Trello Card&#x306E;name&#x304B;&#x3089;Story&#x306E;&#x7D20;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306B;&#x5909;&#x63DB;
+   *
+   * @param {string} name card name
+   * @return {Object}
+   */
+  parseCardName(name) {
+    const match = NAME_BASE_REGEX.exec(name);
+    if (!match) {
+      return {
+        title: name,
+        type: STORY_TYPE.invalid
+      };
+    }
+    const [id, spent, es50, es90, body] = match.slice(1);
+    const parentMatch = body.match(/\s+#(\d+)/);
+    const dependsMatch = body.match(/\s+&amp;(\d+)/g);
+    const parentId = parentMatch &amp;&amp; parseInt(parentMatch[1], 10);
+    const baseStory = {
+      id: parseInt(id, 10),
+      title: body.replace(/(\s+#(\d+))|(\s+&amp;(\d+))/g, &apos;&apos;).trim(),
+      dependIds: dependsMatch ? dependsMatch.map(m =&gt; parseInt(/\d+/.exec(m)[0], 10)) : []
+    };
+    if (parentId) {
+      return Object.assign({}, baseStory, {
+        parentId,
+        type: STORY_TYPE.story,
+        time: {
+          spent: spent ? parseInt(spent, 10) : null,
+          es50: es50 ? parseInt(es50, 10) : null,
+          es90: es90 ? parseInt(es90, 10) : null
+        }
+      });
+    }
+    return Object.assign({}, baseStory, {
+      type: STORY_TYPE.issue
+    });
+  }
+
+  /**
+   * Trello List&#x306E;name&#x304B;&#x3089;Sprint&#x306B;&#x5909;&#x63DB;
+   *
+   * @param {string} name trello list name
+   * @return {?Sprint}
+   */
+  parseListName(name) {
+    const sprintMatches = /^Sprint\.\s*\d+\s*\((\d{4})(\d{2})(\d{2})\)/.exec(name);
+    if (!sprintMatches) {
+      return null;
+    }
+    const [year, month, day] = sprintMatches.slice(1).map(s =&gt; parseInt(s, 10));
+    return {
+      name,
+      due: new Date(year, month - 1, day)
+    };
+  }
+
+  /**
+   * Trello Card&#x3068;Board&#x30C7;&#x30FC;&#x30BF;&#x304B;&#x3089;Story&#x306B;&#x5909;&#x63DB;
+   *
+   * @param {Object} card Trello Card
+   * @param {Object} board Trello Board
+   * @return {StoryNode}
+   */
+  parseCard(card, board) {
+    const story = this.parseCardName(card.name);
+    const labels = card.labels.map(label =&gt; label.name);
+    const members = card.idMembers.map(mid =&gt; {
+      const member = board.members.find(m =&gt; m.id === mid);
+      if (!member) {
+        return null;
+      }
+      return {
+        username: member.username,
+        avatarUrl: member.avatarHash &amp;&amp; `${AVATAR_ENDPOINT}/${member.avatarHash}/30.png`
+      };
+    }).filter(m =&gt; m);
+    const list = board.lists.find(l =&gt; l.id === card.idList);
+    const override = {
+      members,
+      status: labels.indexOf(STORY_STATUS.open) &gt;= 0 ? STORY_STATUS.open : story.status,
+      card: {
+        labels,
+        url: card.shortUrl,
+        listName: list.name,
+        pos: card.pos
+      }
+    };
+    const sprint = this.parseListName(list.name);
+    if (sprint) {
+      return Object.assign({}, story, override, {sprint});
+    }
+    return Object.assign({}, story, override);
+  }
+
+  /**
+   * Story &#x4E00;&#x89A7;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;
+   *
+   * @return {Promise&lt;StoryNode[], null&gt;}
+   */
+  getStories() {
+    return new Promise((resolve, reject) =&gt; {
+      request.get(`${API_ENDPOINT}/1/boards/${this.boardId}`)
+        .query({
+          cards: &apos;visible&apos;,
+          card_fields: &apos;labels,name,shortUrl,pos,idList,idMembers&apos;,
+          lists: &apos;open&apos;,
+          members: &apos;all&apos;,
+          member_fields: &apos;username,avatarHash&apos;,
+          token: this.apiToken,
+          key: this.apiKey
+        })
+        .end((err, res) =&gt; {
+          if (err) {
+            return reject(err);
+          }
+          const stories = res.body.cards.map(card =&gt; {
+            return this.parseCard(card, res.body);
+          });
+          resolve(stories);
+        });
+    });
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.3)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
