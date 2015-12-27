@@ -420,6 +420,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~storyclient#getstatusfromlabels",
+    "class/src/index.js~StoryClient.html#instance-method-getStatusFromLabels",
+    "src/index.js~StoryClient#getStatusFromLabels",
+    "method"
+  ],
+  [
     "src/index.js~storyclient#getstories",
     "class/src/index.js~StoryClient.html#instance-method-getStories",
     "src/index.js~StoryClient#getStories",

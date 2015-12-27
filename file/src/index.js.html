@@ -205,6 +205,21 @@ export default class StoryClient {
   }
 
   /**
+   * label.name&#x306E;&#x30EA;&#x30B9;&#x30C8;&#x304B;&#x3089;Status&#x3092;&#x53D6;&#x5F97;
+   *
+   * @param {string[]} labels label list
+   * @return {string}
+   */
+  getStatusFromLabels(labels) {
+    if (labels.indexOf(STORY_STATUS.waiting) &gt;= 0) {
+      return STORY_STATUS.waiting;
+    } else if (labels.indexOf(STORY_STATUS.open) &gt;= 0) {
+      return STORY_STATUS.open;
+    }
+    return STORY_STATUS.close;
+  }
+
+  /**
    * Trello Card&#x3068;Board&#x30C7;&#x30FC;&#x30BF;&#x304B;&#x3089;Story&#x306B;&#x5909;&#x63DB;
    *
    * @param {Object} card Trello Card
@@ -227,7 +242,7 @@ export default class StoryClient {
     const list = board.lists.find(l =&gt; l.id === card.idList);
     const override = {
       members,
-      status: labels.indexOf(STORY_STATUS.open) &gt;= 0 ? STORY_STATUS.open : story.status,
+      status: this.getStatusFromLabels(labels),
       card: {
         labels,
         url: card.shortUrl,
