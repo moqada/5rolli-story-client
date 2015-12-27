@@ -116,6 +116,49 @@
     }
   },
   {
+    "id": 191,
+    "title": "ブラッシュアップ2",
+    "dependIds": [],
+    "parentId": 1,
+    "type": "story",
+    "time": {
+      "spent": null,
+      "es50": null,
+      "es90": null
+    },
+    "members": [],
+    "status": "close",
+    "card": {
+      "labels": [],
+      "url": "https://trello.com/c/555556",
+      "listName": "inbox",
+      "pos": 3457025
+    }
+  },
+  {
+    "id": 192,
+    "title": "ブラッシュアップ3",
+    "dependIds": [191],
+    "parentId": 1,
+    "type": "story",
+    "time": {
+      "spent": null,
+      "es50": null,
+      "es90": null
+    },
+    "members": [],
+    "status": "waiting",
+    "card": {
+      "labels": [
+        "waiting",
+        "open"
+      ],
+      "url": "https://trello.com/c/555557",
+      "listName": "inbox",
+      "pos": 3457027
+    }
+  },
+  {
     "title": "あかんやつ",
     "type": "invalid",
     "members": [],

@@ -158,6 +158,21 @@ export default class StoryClient {
   }
 
   /**
+   * label.nameのリストからStatusを取得
+   *
+   * @param {string[]} labels label list
+   * @return {string}
+   */
+  getStatusFromLabels(labels) {
+    if (labels.indexOf(STORY_STATUS.waiting) >= 0) {
+      return STORY_STATUS.waiting;
+    } else if (labels.indexOf(STORY_STATUS.open) >= 0) {
+      return STORY_STATUS.open;
+    }
+    return STORY_STATUS.close;
+  }
+
+  /**
    * Trello CardとBoardデータからStoryに変換
    *
    * @param {Object} card Trello Card
@@ -180,7 +195,7 @@ export default class StoryClient {
     const list = board.lists.find(l => l.id === card.idList);
     const override = {
       members,
-      status: labels.indexOf(STORY_STATUS.open) >= 0 ? STORY_STATUS.open : story.status,
+      status: this.getStatusFromLabels(labels),
       card: {
         labels,
         url: card.shortUrl,
