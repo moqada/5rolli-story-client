@@ -234,7 +234,7 @@ export default class StoryClient {
           const stories = res.body.cards.map(card => {
             return this.parseCard(card, res.body);
           });
-          resolve(stories);
+          return resolve(stories);
         });
     });
   }
