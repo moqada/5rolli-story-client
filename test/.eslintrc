@@ -1,5 +1,2 @@
-env:
-  mocha: true
-rules:
-  global-require: 0
-  no-magic-numbers: 0
+extends:
+  - moqada/mocha

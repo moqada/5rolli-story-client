@@ -1,9 +1,4 @@
-extends: moqada
+extends:
+  - moqada
+  - moqada/node
 parser: babel-eslint
-rules:
-  require-jsdoc:
-    - 2
-    - require:
-        FunctionDeclaration: true
-        MethodDefinition: true
-        ClassDeclaration: false
