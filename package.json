@@ -7,7 +7,7 @@
     "url": "https://github.com/moqada/5rolli-story-client/issues"
   },
   "dependencies": {
-    "superagent": "^2.0.0"
+    "superagent": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.3.13",
